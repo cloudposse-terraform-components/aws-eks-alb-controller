@@ -1,9 +1,15 @@
 name: "aws-eks-alb-controller"
 # Canonical GitHub repo
 github_repo: "cloudposse-terraform-components/aws-eks-alb-controller"
-tags: []
+tags:
+  - layer/eks
+  - provider/aws
+  - provider/helm
 # Categories of this project
-categories: []
+categories:
+  - layer/eks
+  - provider/aws
+  - provider/helm
 # License of this project
 license: "APACHE2"
 # Badges to display
@@ -22,5 +28,8 @@ related:
     description: "Atmos is like docker-compose but for your infrastructure"
     url: "https://atmos.tools"
 contributors: [] # If included generates contribs
-description: |
+description: |-
   # Components
+   * [alb-controller](https://github.com/cloudposse-terraform-components/aws-eks-alb-controller/tree/main/src/alb-controller)
+   * [alb-controller-ingress-class](https://github.com/cloudposse-terraform-components/aws-eks-alb-controller/tree/main/src/alb-controller-ingress-class)
+   * [alb-controller-ingress-group](https://github.com/cloudposse-terraform-components/aws-eks-alb-controller/tree/main/src/alb-controller-ingress-group)
