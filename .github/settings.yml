@@ -2,6 +2,6 @@
 _extends: .github
 repository:
   name: aws-eks-alb-controller
-  description: Template for Terraform Components
+  description: This component creates a Helm release for [alb-controller](https://github
   homepage: https://cloudposse.com/accelerate
   topics: terraform, terraform-component

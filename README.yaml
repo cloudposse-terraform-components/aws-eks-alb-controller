@@ -1,9 +1,17 @@
 name: "aws-eks-alb-controller"
 # Canonical GitHub repo
 github_repo: "cloudposse-terraform-components/aws-eks-alb-controller"
-tags: []
+tags:
+  - component/eks/alb-controller
+  - layer/eks
+  - provider/aws
+  - provider/helm
 # Categories of this project
-categories: []
+categories:
+  - component/eks/alb-controller
+  - layer/eks
+  - provider/aws
+  - provider/helm
 # License of this project
 license: "APACHE2"
 # Badges to display
@@ -22,5 +30,76 @@ related:
     description: "Atmos is like docker-compose but for your infrastructure"
     url: "https://atmos.tools"
 contributors: [] # If included generates contribs
-description: |
-  # Components
+description: |-
+  This component creates a Helm release for
+  [alb-controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller) on an EKS cluster.
+
+  [alb-controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller) is a Kubernetes addon that, in the
+  context of AWS, provisions and manages ALBs and NLBs based on Service and Ingress annotations. This module also can (and
+  is recommended to) provision a default IngressClass.
+
+  ### Special note about upgrading
+
+  When upgrading the chart version, check to see if the IAM policy for the service account needs to be updated. If it
+  does, update the policy in the `distributed-iam-policy.tf` file. Probably the easiest way to check if it needs updating
+  is to simply download the policy from
+  https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json and
+  compare it to the policy in `distributed-iam-policy.tf`.
+
+  ## Usage
+
+  **Stack Level**: Regional
+
+  Once the catalog file is created, the file can be imported as follows.
+
+  ```yaml
+  import:
+    - catalog/eks/alb-controller
+    ...
+  ```
+
+  The default catalog values `e.g. stacks/catalog/eks/alb-controller.yaml`
+
+  ```yaml
+  components:
+    terraform:
+      eks/alb-controller:
+        vars:
+          chart: aws-load-balancer-controller
+          chart_repository: https://aws.github.io/eks-charts
+          # IMPORTANT: When updating the chart version, check to see if the IAM policy for the service account.
+          # needs to be updated, and if it does, update the policy in the `distributed-iam-policy.tf` file.
+          chart_version: "1.7.1"
+          create_namespace: true
+          kubernetes_namespace: alb-controller
+          # this feature causes inconsistent final plans
+          # see https://github.com/hashicorp/terraform-provider-helm/issues/711#issuecomment-836192991
+          helm_manifest_experiment_enabled: false
+          default_ingress_class_name: default
+          default_ingress_group: common
+          default_ingress_ip_address_type: ipv4
+          default_ingress_scheme: internet-facing
+          # You can use `chart_values` to set any other chart options. Treat `chart_values` as the root of the doc.
+          #
+          # # For example
+          # ---
+          # chart_values:
+          #   enableShield: false
+          chart_values: {}
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+  ```
+
+  <!-- prettier-ignore-start -->
+
+  <!-- prettier-ignore-end -->
+
+  ## References
+
+  - [alb-controller](https://artifacthub.io/packages/helm/aws/aws-load-balancer-controller) - Helm Chart
+  - [alb-controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller) - AWS Load Balancer Controller
