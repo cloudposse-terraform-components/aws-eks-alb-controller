@@ -1,6 +1,6 @@
 module "alb_controller" {
   source  = "cloudposse/helm-release/aws"
-  version = "0.10.0"
+  version = "0.10.1"
 
   chart           = var.chart
   repository      = var.chart_repository
