@@ -23,9 +23,9 @@ complete JSON policy document that is updated as needed.
 In this release:
 
 1. We have updated the policy to the one distributed with version 2.6.0 of the ALB controller. This fixes an issue where
-   the controller was not able to create the service-linked role for the Elastic Load Balancing service.
+  the controller was not able to create the service-linked role for the Elastic Load Balancing service.
 2. To ease maintenance, we have moved the policy document to a separate file, `distributed-iam-policy.tf` and made it
-   easy to update or override.
+  easy to update or override.
 
 #### Gov Cloud and China Regions
 
