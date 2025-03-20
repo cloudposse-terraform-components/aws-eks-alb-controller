@@ -36,8 +36,8 @@ func (s *ComponentSuite) TestBasic() {
 		"kubernetes_namespace": controllerNamespace,
 	}
 
-	defer s.DestroyAtmosComponent(s.T(), component, stack, nil)
-	options, _ := s.DeployAtmosComponent(s.T(), component, stack, nil)
+	defer s.DestroyAtmosComponent(s.T(), component, stack, &input)
+	options, _ := s.DeployAtmosComponent(s.T(), component, stack, &input)
 	assert.NotNil(s.T(), options)
 
 	type Metadata struct {
