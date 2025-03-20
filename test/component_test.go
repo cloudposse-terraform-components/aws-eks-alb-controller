@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	networkingv1 "k8s.io/api/networking/v1"
-
+	corev1 "k8s.io/api/core/v1"
 
 	"k8s.io/client-go/informers"
 	"k8s.io/client-go/tools/cache"
