@@ -203,7 +203,7 @@ func (s *ComponentSuite) TestBasic() {
 	assert.Equal(s.T(), ingressStatus.Name, ingressName)
 	assert.NotEmpty(s.T(), ingressStatus.Status.LoadBalancer.Ingress[0].Hostname)
 
-	s.DriftTest(component, stack, nil)
+	s.DriftTest(component, stack, &input)
 }
 
 func (s *ComponentSuite) TestEnabledFlag() {
