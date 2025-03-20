@@ -134,7 +134,7 @@ locals {
   ] : []
 
   exec_role = local.kube_exec_auth_enabled && var.kube_exec_auth_role_arn_enabled ? [
-    "--role-arn", lcoalesce(var.kube_exec_auth_role_arn, module.iam_roles.terraform_role_arn)
+    "--role-arn", coalesce(var.kube_exec_auth_role_arn, module.iam_roles.terraform_role_arn)
   ] : []
 
   # Provide dummy configuration for the case where the EKS cluster is not available.
