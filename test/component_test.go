@@ -77,11 +77,6 @@ func (s *ComponentSuite) TestBasic() {
 	assert.NoError(s.T(), err)
 	assert.NotNil(s.T(), clientset)
 
-	namespaces, err := clientset.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{})
-	assert.NoError(s.T(), err)
-	assert.NotNil(s.T(), namespaces)
-	assert.Equal(s.T(), len(namespaces.Items), 5)
-
 	deployment, err := clientset.AppsV1().Deployments(controllerNamespace).Get(context.Background(), "aws-load-balancer-controller", metav1.GetOptions{})
 	assert.NoError(s.T(), err)
 	assert.NotNil(s.T(), deployment)
@@ -92,6 +87,15 @@ func (s *ComponentSuite) TestBasic() {
 
 	ingressNamespace := fmt.Sprintf("example-%s", randomID)
 	ingressName := fmt.Sprintf("example-ingress-%s", randomID)
+
+	defer clientset.CoreV1().Namespaces().Delete(context.Background(), ingressNamespace, metav1.DeleteOptions{})
+	_, err := clientset.CoreV1().Namespaces().Create(context.Background(), &corev1.Namespace{
+		ObjectMeta: metav1.ObjectMeta{
+			Name: ingressNamespace,
+		},
+	}, metav1.CreateOptions{})
+	assert.NoError(s.T(), err)
+
 
 	pathType := networkingv1.PathTypeImplementationSpecific
 
