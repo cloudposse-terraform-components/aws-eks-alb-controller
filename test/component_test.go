@@ -3,10 +3,12 @@ package test
 import (
 	"context"
 	"testing"
+	"strings"
 	"fmt"
 	"time"
 	helper "github.com/cloudposse/test-helpers/pkg/atmos/component-helper"
 	awsHelper "github.com/cloudposse/test-helpers/pkg/aws"
+	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/cloudposse/test-helpers/pkg/atmos"
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
