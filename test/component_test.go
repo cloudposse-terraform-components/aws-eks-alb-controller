@@ -161,25 +161,24 @@ func (s *ComponentSuite) TestBasic() {
 
 	informer.AddEventHandler(cache.ResourceEventHandlerFuncs{
 		UpdateFunc: func(oldObj, newObj interface{}) {
-            _, ok := oldObj.(*networkingv1.Ingress)
-            if !ok {
-                return
-            }
-            newIngress, ok := newObj.(*networkingv1.Ingress)
-            if !ok {
-                return
-            }
+			_, ok := oldObj.(*networkingv1.Ingress)
+			if !ok {
+				return
+			}
+			newIngress, ok := newObj.(*networkingv1.Ingress)
+			if !ok {
+				return
+			}
 
-            // Check if the Ingress's LoadBalancer status has been populated
-            if len(newIngress.Status.LoadBalancer.Ingress[0].Hostname) > 0 {
-                fmt.Printf("Ingress %s is ready\n", newIngress.Name)
+			// Check if the Ingress's LoadBalancer status has been populated
+			if len(newIngress.Status.LoadBalancer.Ingress) > 0 && len(newIngress.Status.LoadBalancer.Ingress[0].Hostname) > 0 {
+				fmt.Printf("Ingress %s is ready\n", newIngress.Name)
 				close(stopChannel)
-            } else {
-                fmt.Printf("Ingress %s is not ready yet\n", newIngress.Name)
-            }
-        },
+			} else {
+				fmt.Printf("Ingress %s is not ready yet\n", newIngress.Name)
+			}
+		},
 	})
-
 	go informer.Run(stopChannel)
 
 	select {
