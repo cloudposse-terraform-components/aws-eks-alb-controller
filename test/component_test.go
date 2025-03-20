@@ -189,6 +189,8 @@ func (s *ComponentSuite) TestBasic() {
 	assert.NoError(s.T(), err)
 	assert.Equal(s.T(), ingressStatus.Name, ingressName)
 	assert.NotEmpty(s.T(), ingressStatus.Status.LoadBalancer.Ingress[0].Hostname)
+
+	s.DriftTest(component, stack, nil)
 }
 
 func (s *ComponentSuite) TestEnabledFlag() {
