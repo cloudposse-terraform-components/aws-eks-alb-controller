@@ -152,7 +152,11 @@ func (s *ComponentSuite) TestBasic() {
 		},
 	}
 
-	defer clientset.NetworkingV1().Ingresses(ingressNamespace).Delete(context.Background(), ingressName, metav1.DeleteOptions{})
+	defer func() {
+		if err := clientset.NetworkingV1().Ingresses(ingressNamespace).Delete(context.Background(), ingressName, metav1.DeleteOptions{}); err != nil {
+			fmt.Printf("Error deleting ingress %s: %v\n", ingressName, err)
+		}
+	}()
 	_, err = clientset.NetworkingV1().Ingresses(ingressNamespace).Create(context.Background(), ingress, metav1.CreateOptions{})
 	assert.NoError(s.T(), err)
 	assert.NotNil(s.T(), ingress)
