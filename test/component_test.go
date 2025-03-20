@@ -88,7 +88,11 @@ func (s *ComponentSuite) TestBasic() {
 	ingressNamespace := fmt.Sprintf("example-%s", randomID)
 	ingressName := fmt.Sprintf("example-ingress-%s", randomID)
 
-	defer clientset.CoreV1().Namespaces().Delete(context.Background(), ingressNamespace, metav1.DeleteOptions{})
+	defer func() {
+		if err := clientset.CoreV1().Namespaces().Delete(context.Background(), ingressNamespace, metav1.DeleteOptions{}); err != nil {
+			fmt.Printf("Error deleting namespace %s: %v\n", ingressNamespace, err)
+		}
+	}()
 	_, err = clientset.CoreV1().Namespaces().Create(context.Background(), &corev1.Namespace{
 		ObjectMeta: metav1.ObjectMeta{
 			Name: ingressNamespace,
