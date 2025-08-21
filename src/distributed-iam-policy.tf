@@ -14,8 +14,8 @@
 
 locals {
   # To update, just replace everything between the two "EOT"s with the contents of the downloaded JSON file.
-  # Below is the policy as of version 2.6.0, downloaded from
-  # https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.6.0/docs/install/iam_policy.json
+  # Below is the policy as of version 2.13.4, downloaded from
+  # https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.13.4/docs/install/iam_policy.json
   # This policy is for the `aws` partition. Override overridable_distributed_iam_policy for other partitions.
   overridable_distributed_iam_policy = <<EOT
 {
@@ -49,6 +49,9 @@ locals {
                 "ec2:DescribeTags",
                 "ec2:GetCoipPoolUsage",
                 "ec2:DescribeCoipPools",
+                "ec2:GetSecurityGroupsForVpc",
+                "ec2:DescribeIpamPools",
+                "ec2:DescribeRouteTables",
                 "elasticloadbalancing:DescribeLoadBalancers",
                 "elasticloadbalancing:DescribeLoadBalancerAttributes",
                 "elasticloadbalancing:DescribeListeners",
@@ -59,7 +62,9 @@ locals {
                 "elasticloadbalancing:DescribeTargetGroupAttributes",
                 "elasticloadbalancing:DescribeTargetHealth",
                 "elasticloadbalancing:DescribeTags",
-                "elasticloadbalancing:DescribeTrustStores"
+                "elasticloadbalancing:DescribeTrustStores",
+                "elasticloadbalancing:DescribeListenerAttributes",
+                "elasticloadbalancing:DescribeCapacityReservation"
             ],
             "Resource": "*"
         },
@@ -208,7 +213,10 @@ locals {
                 "elasticloadbalancing:DeleteLoadBalancer",
                 "elasticloadbalancing:ModifyTargetGroup",
                 "elasticloadbalancing:ModifyTargetGroupAttributes",
-                "elasticloadbalancing:DeleteTargetGroup"
+                "elasticloadbalancing:DeleteTargetGroup",
+                "elasticloadbalancing:ModifyListenerAttributes",
+                "elasticloadbalancing:ModifyCapacityReservation",
+                "elasticloadbalancing:ModifyIpPools"
             ],
             "Resource": "*",
             "Condition": {
@@ -254,7 +262,8 @@ locals {
                 "elasticloadbalancing:ModifyListener",
                 "elasticloadbalancing:AddListenerCertificates",
                 "elasticloadbalancing:RemoveListenerCertificates",
-                "elasticloadbalancing:ModifyRule"
+                "elasticloadbalancing:ModifyRule",
+                "elasticloadbalancing:SetRulePriorities"
             ],
             "Resource": "*"
         }
