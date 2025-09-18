@@ -59,7 +59,6 @@ module "alb_controller" {
       ingressClassConfig = {
         default = var.default_ingress_enabled
       }
-      defaultTags = module.this.tags
     }),
     # additional values
     yamlencode(var.chart_values)
