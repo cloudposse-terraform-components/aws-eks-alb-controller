@@ -135,7 +135,7 @@ components:
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.9.0, < 6.0.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.0.0, < 3.0.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.14.0, != 2.21.0 |
-| <a name="requirement_utils"></a> [utils](#requirement\_utils) | >= 1.7.1, != 1.4.0, < 1.32.0 |
+| <a name="requirement_utils"></a> [utils](#requirement\_utils) | >= 2.0.0, < 3.0.0 |
 
 ## Providers
 
@@ -148,10 +148,10 @@ components:
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_alb_controller"></a> [alb\_controller](#module\_alb\_controller) | cloudposse/helm-release/aws | 0.10.1 |
-| <a name="module_eks"></a> [eks](#module\_eks) | cloudposse/stack-config/yaml//modules/remote-state | 1.8.0 |
+| <a name="module_eks"></a> [eks](#module\_eks) | cloudposse/stack-config/yaml//modules/remote-state | 2.0.0 |
 | <a name="module_iam_roles"></a> [iam\_roles](#module\_iam\_roles) | ../../account-map/modules/iam-roles | n/a |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | cloudposse/stack-config/yaml//modules/remote-state | 1.8.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | cloudposse/stack-config/yaml//modules/remote-state | 2.0.0 |
 
 ## Resources
 
