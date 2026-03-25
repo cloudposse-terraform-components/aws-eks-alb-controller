@@ -1,6 +1,12 @@
+locals {
+  enabled = module.this.enabled && !var.eks_auto_mode_enabled
+}
+
 module "alb_controller" {
   source  = "cloudposse/helm-release/aws"
   version = "0.10.1"
+
+  enabled = local.enabled
 
   chart           = var.chart
   repository      = var.chart_repository
