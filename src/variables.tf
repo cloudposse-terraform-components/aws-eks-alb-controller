@@ -3,6 +3,13 @@ variable "region" {
   type        = string
 }
 
+variable "eks_auto_mode_enabled" {
+  type        = bool
+  description = "Set to true if the EKS cluster has Auto Mode networking enabled. When true, this component is disabled because Auto Mode includes built-in elastic load balancing support, making a self-managed ALB controller unnecessary."
+  default     = false
+  nullable    = false
+}
+
 variable "chart_description" {
   type        = string
   description = "Set release description attribute (visible in the history)."
